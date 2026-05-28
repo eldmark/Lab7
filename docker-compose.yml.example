@@ -1,0 +1,48 @@
+services:
+  postgres:
+    # PostgreSQL almacena la base del laboratorio y la base interna de Metabase.
+    image: postgres:16.14-alpine
+    container_name: cc3088-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      # Usuario y base inicial del laboratorio.
+      POSTGRES_USER: cc3088
+      POSTGRES_PASSWORD: cc3088_password
+      POSTGRES_DB: retailmax
+      # Mantener el reloj alineado con el entorno del curso.
+      TZ: America/Guatemala
+    volumes:
+      # Persistencia del cluster PostgreSQL en el directorio local requerido.
+      - ./metabase-data:/var/lib/postgresql/data
+      # Los scripts .sql se ejecutan automáticamente solo en el primer arranque.
+      - ./sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      # Verifica que PostgreSQL acepte conexiones antes de iniciar Metabase.
+      test: ["CMD-SHELL", "pg_isready -U cc3088 -d retailmax"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  metabase:
+    # Metabase usa PostgreSQL como base de aplicación para persistir dashboards y configuración.
+    image: metabase/metabase:v0.61.2.9
+    container_name: cc3088-metabase
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # Base de datos interna de Metabase.
+      MB_DB_TYPE: postgres
+      MB_DB_HOST: postgres
+      MB_DB_PORT: 5432
+      MB_DB_DBNAME: metabaseappdb
+      MB_DB_USER: metabase
+      MB_DB_PASS: metabase_password
+      # Puerto HTTP del panel.
+      MB_JETTY_PORT: 3000
+    depends_on:
+      postgres:
+        condition: service_healthy
