@@ -53,7 +53,7 @@ http://localhost:3000
   - la estructura del laboratorio
 - `DATA.sql` carga los datos de prueba.
 - Metabase guarda dashboards, colecciones, usuarios y configuraciones dentro de PostgreSQL.
-- Todo queda persistido en la carpeta local `metabase-data/`.
+- Todo queda persistido en el volumen Docker `metabase-data`.
 
 ## Como detenerlo
 
@@ -63,7 +63,7 @@ docker compose down
 
 ## Como borrar datos persistidos
 
-La persistencia real esta en `metabase-data/`.
+La persistencia real esta en el volumen Docker `metabase-data`.
 
 ### Opcion 1: borrar el contenido manualmente
 
@@ -81,7 +81,7 @@ docker compose down
 docker compose down -v
 ```
 
-Ese comando borra volumenes nombrados del proyecto, pero en este laboratorio los datos importantes siguen viviendo en la carpeta local `metabase-data/`, asi que tambien debes vaciarla si quieres reiniciar desde cero.
+Ese comando borra los volúmenes nombrados del proyecto y reinicia el estado persistente de la base de datos.
 
 ### Opcion 3: borrar y reiniciar desde cero
 
