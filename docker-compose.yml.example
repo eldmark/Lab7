@@ -14,8 +14,8 @@ services:
       # Mantener el reloj alineado con el entorno del curso.
       TZ: America/Guatemala
     volumes:
-      # Persistencia del cluster PostgreSQL en el directorio local requerido.
-      - ./metabase-data:/var/lib/postgresql/data
+      # Persistencia del cluster PostgreSQL en un volumen Docker seguro.
+      - metabase-data:/var/lib/postgresql/data
       # Los scripts .sql se ejecutan automáticamente solo en el primer arranque.
       - ./sql:/docker-entrypoint-initdb.d:ro
     healthcheck:
@@ -46,3 +46,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+
+volumes:
+  metabase-data:
