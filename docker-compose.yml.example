@@ -5,7 +5,7 @@ services:
     container_name: cc3088-postgres
     restart: unless-stopped
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       # Usuario y base inicial del laboratorio.
       POSTGRES_USER: cc3088

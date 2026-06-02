@@ -20,7 +20,7 @@ Infraestructura reproducible para el laboratorio con Docker Compose, PostgreSQL 
 - Docker Engine instalado.
 - Docker Compose v2 (`docker compose`).
 - Puertos libres:
-  - `5432` para PostgreSQL
+  - `5433` para PostgreSQL
   - `3000` para Metabase
 
 ## Como correr el proyecto
@@ -188,7 +188,7 @@ docker logs cc3088-postgres
 Si ves errores de inicializacion:
 
 - verifica que `metabase-data/` este vacio si quieres reinicializar
-- confirma que el puerto `5432` no este ocupado por otro servicio
+- confirma que el puerto `5433` no este ocupado por otro servicio
 
 ### 3. Cambie los SQL pero no se reflejan
 
@@ -201,7 +201,7 @@ Para forzar una nueva inicializacion:
 2. elimina `metabase-data/`
 3. ejecuta otra vez `docker compose up`
 
-### 4. Puerto 5432 o 3000 ocupado
+### 4. Puerto 5433 o 3000 ocupado
 
 Verifica que proceso lo usa:
 
@@ -212,7 +212,7 @@ docker ps
 o en Windows:
 
 ```powershell
-netstat -ano | findstr :5432
+netstat -ano | findstr :5433
 netstat -ano | findstr :3000
 ```
 
