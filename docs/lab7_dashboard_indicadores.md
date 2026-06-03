@@ -255,6 +255,10 @@ ORDER BY pct_devoluciones DESC;
 
 ![Porcentaje de pedidos devueltos por tienda](unploads/porcentaje_de_pedidos_devueltos_por_tienda.png)
 
+---
 
+Usario: sarahestrada33@gmail.com
+
+Contraseña: Hola_Mundo_123
 
 
