@@ -20,6 +20,8 @@ GROUP BY t.id_tienda, t.nombre
 ORDER BY empleados DESC;
 ```
 
+![Cantidad de empleados por tienda](unploads/cantidad_empleados_por_tienda.png)
+
 ### Indicador 2: Distribución por puesto
 - **Qué representa:** cantidad de empleados agrupados por `puesto`.
 - **Importancia:** muestra la composición de roles dentro de la fuerza laboral.
@@ -33,6 +35,8 @@ FROM empleado
 GROUP BY puesto
 ORDER BY cantidad DESC;
 ```
+
+![Distribución por puesto](unploads/distribucion_por_puesta.png)
 
 ### Indicador 3: Distribución salarial por región
 - **Qué representa:** salario promedio y mediano por `region` de tienda.
@@ -51,6 +55,8 @@ GROUP BY t.region
 ORDER BY salario_promedio DESC;
 ```
 
+![Distribución salarial por departamento](unploads/distribución_salarial_por_departamento.png)
+
 ### Indicador 4: Antigüedad promedio por tienda
 - **Qué representa:** años promedio de antigüedad de los empleados en cada tienda.
 - **Importancia:** muestra cuáles tiendas tienen personal más experimentado o más nuevo.
@@ -67,6 +73,8 @@ LEFT JOIN empleado e ON e.id_tienda = t.id_tienda
 GROUP BY t.id_tienda, t.nombre
 ORDER BY antiguedad_promedio_anos DESC;
 ```
+
+![Antigüedad promedio por tienda](unploads/anti_prom_tie.png)
 
 ### Indicador 5: Top tiendas con más empleados
 - **Qué representa:** tiendas con mayor número de empleados.
@@ -85,6 +93,8 @@ ORDER BY empleados DESC
 LIMIT 10;
 ```
 
+![Top tiendas con más empleados](unploads/top_10_empleados_con_mayor_salario.png)
+
 ### Indicador 6: Relación empleados administrativos vs operativos
 - **Qué representa:** proporción entre empleados administrativos y operativos según el contenido del campo `puesto`.
 - **Importancia:** muestra el equilibrio entre funciones de soporte y de operación directa.
@@ -99,6 +109,8 @@ SELECT
   ROUND(100.0 * SUM(CASE WHEN puesto ILIKE '%admin%' OR puesto ILIKE '%geren%' OR puesto ILIKE '%encarg%' THEN 1 ELSE 0 END) / NULLIF(COUNT(*),0),2) AS pct_administrativos
 FROM empleado;
 ```
+
+![Relación administrativos vs operativos](unploads/Relacion_empleados_administrativos_vs_operativos.png)
 
 ### Indicador 7: Carga de trabajo por empleado por tienda
 - **Qué representa:** número de pedidos por empleado en cada tienda.
@@ -118,6 +130,8 @@ LEFT JOIN pedido p ON p.id_tienda = t.id_tienda
 GROUP BY t.id_tienda, t.nombre
 ORDER BY pedidos_por_empleado DESC;
 ```
+
+![Carga de trabajo por empleado por tienda](unploads/carga_de_trabajo_por_empleado.png)
 
 ---
 
@@ -140,6 +154,8 @@ GROUP BY puesto
 ORDER BY salario_promedio DESC;
 ```
 
+![Salario promedio por puesto](unploads/salario_promedio_por_puesto.png)
+
 ### Indicador 2: Costo total de nómina por tienda
 - **Qué representa:** suma de salarios de los empleados en cada tienda.
 - **Importancia:** muestra el peso del costo laboral por punto de venta.
@@ -155,6 +171,8 @@ JOIN tienda t ON e.id_tienda = t.id_tienda
 GROUP BY t.id_tienda, t.nombre
 ORDER BY total_nomina DESC;
 ```
+
+![Costo total de nómina por tienda](unploads/costo_total_de_nomina_por_tienda.png)
 
 ### Indicador 3: Top 10 empleados con mayor salario
 - **Qué representa:** empleados con salarios más altos.
@@ -173,6 +191,8 @@ ORDER BY salario DESC
 LIMIT 10;
 ```
 
+![Top 10 empleados con mayor salario](unploads/top_10_empleados_con_mayor_salario.png)
+
 ### Indicador 4: Comparación salarial entre regiones
 - **Qué representa:** salario promedio por región de la tienda.
 - **Importancia:** revela brechas salariales geográficas.
@@ -188,6 +208,8 @@ JOIN tienda t ON e.id_tienda = t.id_tienda
 GROUP BY t.region
 ORDER BY salario_promedio DESC;
 ```
+
+![Comparación salarial entre regiones](unploads/comparacion_salarial_entre_regiones.png)
 
 ### Indicador 5: Evolución mensual de costos salariales
 - **Qué representa:** tendencia de la nómina mensual a lo largo del tiempo.
@@ -210,6 +232,8 @@ GROUP BY m.mes_inicio
 ORDER BY m.mes_inicio;
 ```
 
+![Evolución mensual de costos salariales](unploads/evolucion_mensual_de_costos_salariales.png)
+
 ### Indicador 6: Porcentaje de pedidos devueltos por tienda
 - **Qué representa:** proporción de pedidos devueltos respecto al total de pedidos de cada tienda.
 - **Importancia:** relaciona el rendimiento comercial con la calidad del servicio y la operación.
@@ -229,25 +253,12 @@ GROUP BY t.id_tienda, t.nombre
 ORDER BY pct_devoluciones DESC;
 ```
 
+![Porcentaje de pedidos devueltos por tienda](unploads/porcentaje_de_pedidos_devueltos_por_tienda.png)
+
 ---
 
-## Instrucciones para crear las visualizaciones en Metabase
+Usario: sarahestrada33@gmail.com
 
-1. Abrir Metabase y seleccionar la base de datos `retailmax`.
-2. Ir a `Ask a question` > `Native query`.
-3. Pegar la consulta SQL deseada y ejecutar.
-4. Cambiar al tipo de visualización recomendado en la barra de opciones:
-   - `Bar chart` para indicadores de comparación.
-   - `Line chart` para tendencias.
-   - `Donut` o `Pie chart` para proporciones.
-   - `Table` para listados como top 10.
-5. Guardar la consulta como pregunta (`Save as a question`).
-6. Agregar la pregunta al dashboard correspondiente:
-   - Tab 1: `Estructura Organizacional`
-   - Tab 2: `Compensaciones y Rendimiento`
-7. Añadir una descripción breve en cada tarjeta que explique:
-   - qué representa,
-   - por qué es importante,
-   - cómo se interpreta.
+Contraseña: Hola_Mundo_123
 
 

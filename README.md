@@ -44,6 +44,20 @@ docker compose up -d
 http://localhost:3000
 ```
 
+## Como usar el volumen para ver el dashboard
+
+El volumen `metabase-data` guarda la base de datos de PostgreSQL que incluye la metadata de Metabase:
+
+- dashboards
+- preguntas
+- colecciones
+- usuarios
+- permisos
+
+Si conservas el volumen, tus dashboards creados permanecen aunque detengas o reinicies los contenedores.
+
+Si necesitas mover el dashboard a otra máquina, copia el volumen o su contenido a la nueva instalación y usa el mismo `docker-compose.yml`.
+
 ## Que hace esta solucion
 
 - PostgreSQL arranca con la base del laboratorio `retailmax`.
